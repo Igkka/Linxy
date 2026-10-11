@@ -330,71 +330,6 @@
                     return updated;
                 });
 
-                async function uploadMusic(file) {
-                    if (!file) return;
-
-                    if (!file.type.startsWith("audio/")) {
-                        setMessage("Выбери аудиофайл.");
-                        return;
-                    }
-
-                    if (file.size > 20 * 1024 * 1024) {
-                        setMessage("Размер музыки не должен превышать 20 МБ.");
-                        return;
-                    }
-
-                    try {
-                        setMessage("Загружаем музыку...");
-
-                        const signatureResponse = await fetch("/api/upload-signature", {
-                            method: "POST"
-                        });
-
-                        const signatureData = await signatureResponse.json();
-
-                        if (!signatureResponse.ok) {
-                            throw new Error(
-                                signatureData.error || "Не удалось подготовить загрузку."
-                            );
-                        }
-
-                        const formData = new FormData();
-                        formData.append("file", file);
-                        formData.append("api_key", signatureData.apiKey);
-                        formData.append("timestamp", String(signatureData.timestamp));
-                        formData.append("signature", signatureData.signature);
-                        formData.append("folder", signatureData.folder);
-
-                        const uploadResponse = await fetch(
-                            `https://api.cloudinary.com/v1_1/${signatureData.cloudName}/video/upload`,
-                            {
-                                method: "POST",
-                                body: formData
-                            }
-                        );
-
-                        const uploadData = await uploadResponse.json();
-
-                        if (!uploadResponse.ok) {
-                            throw new Error(
-                                uploadData.error?.message || "Не удалось загрузить музыку."
-                            );
-                        }
-
-                        setProfile((prev) => ({
-                            ...prev,
-                            musicUrl: uploadData.secure_url,
-                            musicCover: ""
-                        }));
-
-                        setMessage("Музыка загружена. Нажми Save changes, чтобы сохранить изменения.");
-                    } catch (error) {
-                        console.error("MUSIC_UPLOAD_ERROR:", error);
-                        setMessage(error.message || "Ошибка загрузки музыки.");
-                    }
-                }
-
-
                 setMessage(
                     type === "avatar"
                         ? "Avatar uploaded successfully."
@@ -405,6 +340,155 @@
                 setMessage(error.message);
             }
         }
+
+
+
+ async function getMusicCover(file) {
+    try {
+        const module = await import("jsmediatags/dist/jsmediatags.min.js");
+        const jsmediatags = module.default || module;
+
+        return await new Promise((resolve) => {
+            jsmediatags.read(file, {
+                onSuccess: (result) => {
+                    const picture = result.tags.picture;
+
+                    if (!picture) {
+                        resolve(null);
+                        return;
+                    }
+
+                    const imageData = new Uint8Array(picture.data);
+                    const blob = new Blob([imageData], {
+                        type: picture.format || "image/jpeg"
+                    });
+
+                    resolve(blob);
+                },
+                onError: (error) => {
+                    console.error("MUSIC_COVER_ERROR:", error);
+                    resolve(null);
+                }
+            });
+        });
+    } catch (error) {
+        console.error("MUSIC_TAGS_IMPORT_ERROR:", error);
+        return null;
+    }
+}
+
+async function uploadMusicCover(file, signatureData) {
+    try {
+        const cover = await getMusicCover(file);
+
+        if (!cover) {
+            return "";
+        }
+
+        const formData = new FormData();
+        formData.append("file", cover, "cover.jpg");
+        formData.append("api_key", signatureData.apiKey);
+        formData.append("timestamp", String(signatureData.timestamp));
+        formData.append("signature", signatureData.signature);
+        formData.append("folder", signatureData.folder);
+
+        const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${signatureData.cloudName}/image/upload`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error("COVER_UPLOAD_ERROR:", data);
+            return "";
+        }
+
+        return data.secure_url || "";
+    } catch (error) {
+        console.error("COVER_UPLOAD_ERROR:", error);
+        return "";
+    }
+}
+
+async function uploadMusic(file) {
+    if (!file) return;
+
+    if (!file.type.startsWith("audio/")) {
+        setMessage("Select an audio file.");
+        return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+        setMessage("The music file size should not exceed 20 MB.");
+        return;
+    }
+
+    try {
+        setMessage("Preparing music upload...");
+        const signatureResponse = await fetch("/api/upload-signature", {
+            method: "POST"
+        });
+
+        const signatureData = await signatureResponse.json();
+
+        if (!signatureResponse.ok) {
+            throw new Error(
+                signatureData.error || "Could not prepare the upload."
+            );
+        }
+        setMessage("Uploading music...");
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("api_key", signatureData.apiKey);
+        formData.append("timestamp", String(signatureData.timestamp));
+        formData.append("signature", signatureData.signature);
+        formData.append("folder", signatureData.folder);
+
+        const uploadResponse = await fetch(
+            `https://api.cloudinary.com/v1_1/${signatureData.cloudName}/video/upload`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const uploadData = await uploadResponse.json();
+
+        if (!uploadResponse.ok) {
+            throw new Error(
+                uploadData.error?.message || "The music could not be uploaded."
+            );
+        }
+
+        if (!uploadData.secure_url) {
+            throw new Error("Cloudinary did not return the music URL.");
+        }
+        setMessage("Music uploaded. Processing cover...");
+
+        const musicCover = await uploadMusicCover(file, signatureData);
+
+        setProfile((prev) => ({
+            ...prev,
+            musicUrl: uploadData.secure_url,
+            musicCover
+        }));
+
+        setMessage(
+            musicCover
+                ? "Music and cover uploaded. Click Save changes."
+                : "Music uploaded without an embedded cover. Click Save changes."
+        );
+    } catch (error) {
+        console.error("MUSIC_UPLOAD_ERROR:", error);
+        setMessage(error.message || "Music upload failed.");
+    }
+}
+
 
     const saveProfile = async () => {
         setSaving(true);
@@ -1098,19 +1182,23 @@
             <div className="editor">
                 <div className="form-group">
                     <label>Audio file</label>
-                <input
-                    type="file"
-                    accept="audio/*"
-                    onChange={(e) => {
-                        const file = e.target.files?.[0];
+                    <input
+                        type="file"
+                        accept="audio/*"
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
 
-                        if (file) {
-                            uploadMusic(file);
-                        }
+                            console.log("Выбран файл:", file);
+                            console.log("uploadMusic:", typeof uploadMusic);
 
-                        e.target.value = "";
-                    }}
-                />
+                            if (file) {
+                                uploadMusic(file);
+                            }
+
+                            e.target.value = "";
+                        }}
+                    />
+
 
                     {profile.musicUrl && (
                         <span className="field-hint">
