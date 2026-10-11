@@ -283,7 +283,19 @@
                     body: formData
                 });
 
-                const data = await response.json();
+const text = await response.text();
+
+let data;
+
+try {
+    data = JSON.parse(text);
+} catch {
+    throw new Error(text || "Не удалось загрузить файл");
+}
+
+if (!response.ok) {
+    throw new Error(data.error || "Ошибка загрузки");
+}   
                 console.log("UPLOAD RESPONSE:", data);
 
                 if (!response.ok) {
