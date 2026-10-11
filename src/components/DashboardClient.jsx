@@ -283,19 +283,19 @@
                     body: formData
                 });
 
-const text = await response.text();
+                const text = await response.text();
 
-let data;
+                let data;
 
-try {
-    data = JSON.parse(text);
-} catch {
-    throw new Error(text || "Не удалось загрузить файл");
-}
+                try {
+                    data = JSON.parse(text);
+                } catch {
+                    throw new Error(text || "Не удалось загрузить файл");
+                }
 
-if (!response.ok) {
-    throw new Error(data.error || "Ошибка загрузки");
-}   
+                if (!response.ok) {
+                    throw new Error(data.error || "Ошибка загрузки");
+                }   
                 console.log("UPLOAD RESPONSE:", data);
 
                 if (!response.ok) {
@@ -329,6 +329,71 @@ if (!response.ok) {
 
                     return updated;
                 });
+
+                async function uploadMusic(file) {
+                    if (!file) return;
+
+                    if (!file.type.startsWith("audio/")) {
+                        setMessage("Выбери аудиофайл.");
+                        return;
+                    }
+
+                    if (file.size > 20 * 1024 * 1024) {
+                        setMessage("Размер музыки не должен превышать 20 МБ.");
+                        return;
+                    }
+
+                    try {
+                        setMessage("Загружаем музыку...");
+
+                        const signatureResponse = await fetch("/api/upload-signature", {
+                            method: "POST"
+                        });
+
+                        const signatureData = await signatureResponse.json();
+
+                        if (!signatureResponse.ok) {
+                            throw new Error(
+                                signatureData.error || "Не удалось подготовить загрузку."
+                            );
+                        }
+
+                        const formData = new FormData();
+                        formData.append("file", file);
+                        formData.append("api_key", signatureData.apiKey);
+                        formData.append("timestamp", String(signatureData.timestamp));
+                        formData.append("signature", signatureData.signature);
+                        formData.append("folder", signatureData.folder);
+
+                        const uploadResponse = await fetch(
+                            `https://api.cloudinary.com/v1_1/${signatureData.cloudName}/video/upload`,
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+                        const uploadData = await uploadResponse.json();
+
+                        if (!uploadResponse.ok) {
+                            throw new Error(
+                                uploadData.error?.message || "Не удалось загрузить музыку."
+                            );
+                        }
+
+                        setProfile((prev) => ({
+                            ...prev,
+                            musicUrl: uploadData.secure_url,
+                            musicCover: ""
+                        }));
+
+                        setMessage("Музыка загружена. Нажми Save changes, чтобы сохранить изменения.");
+                    } catch (error) {
+                        console.error("MUSIC_UPLOAD_ERROR:", error);
+                        setMessage(error.message || "Ошибка загрузки музыки.");
+                    }
+                }
+
 
                 setMessage(
                     type === "avatar"
@@ -1033,20 +1098,19 @@ if (!response.ok) {
             <div className="editor">
                 <div className="form-group">
                     <label>Audio file</label>
+                <input
+                    type="file"
+                    accept="audio/*"
+                    onChange={(e) => {
+                        const file = e.target.files?.[0];
 
-                    <input
-                        type="file"
-                        accept="audio/*"
-                        onChange={(e) => {
-                            const file = e.target.files?.[0];
+                        if (file) {
+                            uploadMusic(file);
+                        }
 
-                            if (file) {
-                                uploadImage(file, "music");
-                            }
-
-                            e.target.value = "";
-                        }}
-                    />
+                        e.target.value = "";
+                    }}
+                />
 
                     {profile.musicUrl && (
                         <span className="field-hint">
