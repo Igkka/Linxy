@@ -314,6 +314,7 @@ export type ProfileWhereInput = {
   views?: Prisma.IntFilter<"Profile"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   links?: Prisma.ProfileLinkListRelationFilter
+  viewEvents?: Prisma.ProfileViewListRelationFilter
 }
 
 export type ProfileOrderByWithRelationInput = {
@@ -336,6 +337,7 @@ export type ProfileOrderByWithRelationInput = {
   views?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   links?: Prisma.ProfileLinkOrderByRelationAggregateInput
+  viewEvents?: Prisma.ProfileViewOrderByRelationAggregateInput
 }
 
 export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -361,6 +363,7 @@ export type ProfileWhereUniqueInput = Prisma.AtLeast<{
   views?: Prisma.IntFilter<"Profile"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   links?: Prisma.ProfileLinkListRelationFilter
+  viewEvents?: Prisma.ProfileViewListRelationFilter
 }, "id" | "userId">
 
 export type ProfileOrderByWithAggregationInput = {
@@ -430,6 +433,7 @@ export type ProfileCreateInput = {
   views?: number
   user: Prisma.UserCreateNestedOneWithoutProfileInput
   links?: Prisma.ProfileLinkCreateNestedManyWithoutProfileInput
+  viewEvents?: Prisma.ProfileViewCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateInput = {
@@ -451,6 +455,7 @@ export type ProfileUncheckedCreateInput = {
   musicCover?: string | null
   views?: number
   links?: Prisma.ProfileLinkUncheckedCreateNestedManyWithoutProfileInput
+  viewEvents?: Prisma.ProfileViewUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUpdateInput = {
@@ -472,6 +477,7 @@ export type ProfileUpdateInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
   links?: Prisma.ProfileLinkUpdateManyWithoutProfileNestedInput
+  viewEvents?: Prisma.ProfileViewUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateInput = {
@@ -493,6 +499,7 @@ export type ProfileUncheckedUpdateInput = {
   musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.ProfileLinkUncheckedUpdateManyWithoutProfileNestedInput
+  viewEvents?: Prisma.ProfileViewUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateManyInput = {
@@ -698,6 +705,20 @@ export type ProfileUpdateOneRequiredWithoutLinksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutLinksInput, Prisma.ProfileUpdateWithoutLinksInput>, Prisma.ProfileUncheckedUpdateWithoutLinksInput>
 }
 
+export type ProfileCreateNestedOneWithoutViewEventsInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutViewEventsInput, Prisma.ProfileUncheckedCreateWithoutViewEventsInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutViewEventsInput
+  connect?: Prisma.ProfileWhereUniqueInput
+}
+
+export type ProfileUpdateOneRequiredWithoutViewEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutViewEventsInput, Prisma.ProfileUncheckedCreateWithoutViewEventsInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutViewEventsInput
+  upsert?: Prisma.ProfileUpsertWithoutViewEventsInput
+  connect?: Prisma.ProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutViewEventsInput, Prisma.ProfileUpdateWithoutViewEventsInput>, Prisma.ProfileUncheckedUpdateWithoutViewEventsInput>
+}
+
 export type ProfileCreateWithoutUserInput = {
   id?: string
   description?: string | null
@@ -716,6 +737,7 @@ export type ProfileCreateWithoutUserInput = {
   musicCover?: string | null
   views?: number
   links?: Prisma.ProfileLinkCreateNestedManyWithoutProfileInput
+  viewEvents?: Prisma.ProfileViewCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateWithoutUserInput = {
@@ -736,6 +758,7 @@ export type ProfileUncheckedCreateWithoutUserInput = {
   musicCover?: string | null
   views?: number
   links?: Prisma.ProfileLinkUncheckedCreateNestedManyWithoutProfileInput
+  viewEvents?: Prisma.ProfileViewUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileCreateOrConnectWithoutUserInput = {
@@ -772,6 +795,7 @@ export type ProfileUpdateWithoutUserInput = {
   musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.ProfileLinkUpdateManyWithoutProfileNestedInput
+  viewEvents?: Prisma.ProfileViewUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -792,6 +816,7 @@ export type ProfileUncheckedUpdateWithoutUserInput = {
   musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.ProfileLinkUncheckedUpdateManyWithoutProfileNestedInput
+  viewEvents?: Prisma.ProfileViewUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateWithoutLinksInput = {
@@ -812,6 +837,7 @@ export type ProfileCreateWithoutLinksInput = {
   musicCover?: string | null
   views?: number
   user: Prisma.UserCreateNestedOneWithoutProfileInput
+  viewEvents?: Prisma.ProfileViewCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateWithoutLinksInput = {
@@ -832,6 +858,7 @@ export type ProfileUncheckedCreateWithoutLinksInput = {
   musicArtist?: string | null
   musicCover?: string | null
   views?: number
+  viewEvents?: Prisma.ProfileViewUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileCreateOrConnectWithoutLinksInput = {
@@ -868,6 +895,7 @@ export type ProfileUpdateWithoutLinksInput = {
   musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
+  viewEvents?: Prisma.ProfileViewUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutLinksInput = {
@@ -888,6 +916,107 @@ export type ProfileUncheckedUpdateWithoutLinksInput = {
   musicArtist?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  viewEvents?: Prisma.ProfileViewUncheckedUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileCreateWithoutViewEventsInput = {
+  id?: string
+  description?: string | null
+  avatar?: string | null
+  background?: string | null
+  font?: string | null
+  textColor?: string | null
+  descriptionColor?: string | null
+  iconColor?: string | null
+  backgroundType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  musicUrl?: string | null
+  musicTitle?: string | null
+  musicArtist?: string | null
+  musicCover?: string | null
+  views?: number
+  user: Prisma.UserCreateNestedOneWithoutProfileInput
+  links?: Prisma.ProfileLinkCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileUncheckedCreateWithoutViewEventsInput = {
+  id?: string
+  userId: string
+  description?: string | null
+  avatar?: string | null
+  background?: string | null
+  font?: string | null
+  textColor?: string | null
+  descriptionColor?: string | null
+  iconColor?: string | null
+  backgroundType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  musicUrl?: string | null
+  musicTitle?: string | null
+  musicArtist?: string | null
+  musicCover?: string | null
+  views?: number
+  links?: Prisma.ProfileLinkUncheckedCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileCreateOrConnectWithoutViewEventsInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutViewEventsInput, Prisma.ProfileUncheckedCreateWithoutViewEventsInput>
+}
+
+export type ProfileUpsertWithoutViewEventsInput = {
+  update: Prisma.XOR<Prisma.ProfileUpdateWithoutViewEventsInput, Prisma.ProfileUncheckedUpdateWithoutViewEventsInput>
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutViewEventsInput, Prisma.ProfileUncheckedCreateWithoutViewEventsInput>
+  where?: Prisma.ProfileWhereInput
+}
+
+export type ProfileUpdateToOneWithWhereWithoutViewEventsInput = {
+  where?: Prisma.ProfileWhereInput
+  data: Prisma.XOR<Prisma.ProfileUpdateWithoutViewEventsInput, Prisma.ProfileUncheckedUpdateWithoutViewEventsInput>
+}
+
+export type ProfileUpdateWithoutViewEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  font?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backgroundType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicArtist?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
+  links?: Prisma.ProfileLinkUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileUncheckedUpdateWithoutViewEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  font?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backgroundType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicArtist?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  links?: Prisma.ProfileLinkUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 
@@ -897,10 +1026,12 @@ export type ProfileUncheckedUpdateWithoutLinksInput = {
 
 export type ProfileCountOutputType = {
   links: number
+  viewEvents: number
 }
 
 export type ProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   links?: boolean | ProfileCountOutputTypeCountLinksArgs
+  viewEvents?: boolean | ProfileCountOutputTypeCountViewEventsArgs
 }
 
 /**
@@ -918,6 +1049,13 @@ export type ProfileCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
  */
 export type ProfileCountOutputTypeCountLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProfileLinkWhereInput
+}
+
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeCountViewEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProfileViewWhereInput
 }
 
 
@@ -941,6 +1079,7 @@ export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   views?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   links?: boolean | Prisma.Profile$linksArgs<ExtArgs>
+  viewEvents?: boolean | Prisma.Profile$viewEventsArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
 
@@ -1010,6 +1149,7 @@ export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   links?: boolean | Prisma.Profile$linksArgs<ExtArgs>
+  viewEvents?: boolean | Prisma.Profile$viewEventsArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1024,6 +1164,7 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
     links: Prisma.$ProfileLinkPayload<ExtArgs>[]
+    viewEvents: Prisma.$ProfileViewPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1439,6 +1580,7 @@ export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   links<T extends Prisma.Profile$linksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$linksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProfileLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  viewEvents<T extends Prisma.Profile$viewEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$viewEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProfileViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1907,6 +2049,30 @@ export type Profile$linksArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ProfileLinkScalarFieldEnum | Prisma.ProfileLinkScalarFieldEnum[]
+}
+
+/**
+ * Profile.viewEvents
+ */
+export type Profile$viewEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProfileView
+   */
+  select?: Prisma.ProfileViewSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProfileView
+   */
+  omit?: Prisma.ProfileViewOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProfileViewInclude<ExtArgs> | null
+  where?: Prisma.ProfileViewWhereInput
+  orderBy?: Prisma.ProfileViewOrderByWithRelationInput | Prisma.ProfileViewOrderByWithRelationInput[]
+  cursor?: Prisma.ProfileViewWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProfileViewScalarFieldEnum | Prisma.ProfileViewScalarFieldEnum[]
 }
 
 /**

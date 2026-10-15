@@ -56,3 +56,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type ProfileLink = Prisma.ProfileLinkModel
+/**
+ * Model ProfileView
+ * 
+ */
+export type ProfileView = Prisma.ProfileViewModel

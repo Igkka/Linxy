@@ -17,7 +17,10 @@ export default async function Dashboard() {
         select: {
             id: true,
             uid: true,
-            username: true
+            username: true,
+            email:true,
+            createdAt:true
+
         }
     });
 

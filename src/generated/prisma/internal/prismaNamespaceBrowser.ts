@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Profile: 'Profile',
   User: 'User',
-  ProfileLink: 'ProfileLink'
+  ProfileLink: 'ProfileLink',
+  ProfileView: 'ProfileView'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -119,6 +120,16 @@ export const ProfileLinkScalarFieldEnum = {
 } as const
 
 export type ProfileLinkScalarFieldEnum = (typeof ProfileLinkScalarFieldEnum)[keyof typeof ProfileLinkScalarFieldEnum]
+
+
+export const ProfileViewScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  visitorId: 'visitorId',
+  viewedAt: 'viewedAt'
+} as const
+
+export type ProfileViewScalarFieldEnum = (typeof ProfileViewScalarFieldEnum)[keyof typeof ProfileViewScalarFieldEnum]
 
 
 export const SortOrder = {

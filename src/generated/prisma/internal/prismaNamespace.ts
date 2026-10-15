@@ -399,7 +399,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Profile: 'Profile',
   User: 'User',
-  ProfileLink: 'ProfileLink'
+  ProfileLink: 'ProfileLink',
+  ProfileView: 'ProfileView'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "profile" | "user" | "profileLink"
+    modelProps: "profile" | "user" | "profileLink" | "profileView"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -641,6 +642,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ProfileView: {
+      payload: Prisma.$ProfileViewPayload<ExtArgs>
+      fields: Prisma.ProfileViewFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProfileViewFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProfileViewFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>
+        }
+        findFirst: {
+          args: Prisma.ProfileViewFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProfileViewFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>
+        }
+        findMany: {
+          args: Prisma.ProfileViewFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>[]
+        }
+        create: {
+          args: Prisma.ProfileViewCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>
+        }
+        createMany: {
+          args: Prisma.ProfileViewCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProfileViewCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>[]
+        }
+        delete: {
+          args: Prisma.ProfileViewDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>
+        }
+        update: {
+          args: Prisma.ProfileViewUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProfileViewDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProfileViewUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProfileViewUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProfileViewUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProfileViewPayload>
+        }
+        aggregate: {
+          args: Prisma.ProfileViewAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProfileView>
+        }
+        groupBy: {
+          args: Prisma.ProfileViewGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProfileViewGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProfileViewCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProfileViewCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -727,6 +802,16 @@ export const ProfileLinkScalarFieldEnum = {
 } as const
 
 export type ProfileLinkScalarFieldEnum = (typeof ProfileLinkScalarFieldEnum)[keyof typeof ProfileLinkScalarFieldEnum]
+
+
+export const ProfileViewScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  visitorId: 'visitorId',
+  viewedAt: 'viewedAt'
+} as const
+
+export type ProfileViewScalarFieldEnum = (typeof ProfileViewScalarFieldEnum)[keyof typeof ProfileViewScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -968,6 +1053,7 @@ export type GlobalOmitConfig = {
   profile?: Prisma.ProfileOmit
   user?: Prisma.UserOmit
   profileLink?: Prisma.ProfileLinkOmit
+  profileView?: Prisma.ProfileViewOmit
 }
 
 /* Types for Logging */

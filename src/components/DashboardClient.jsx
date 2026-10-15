@@ -3,6 +3,10 @@
     import { useEffect, useState } from "react";
     import Link from "next/link";
     import "./dashboard.css";
+    import { Mail } from 'lucide-react';
+    import { User } from 'lucide-react';
+    import { RotateCcwKey } from 'lucide-react';
+    import { Trash } from 'lucide-react';
     import {
         siGithub,
         siTelegram,
@@ -175,25 +179,93 @@
             musicUrl:"",
             musicTitle:"",
             musicArtist:"",
-            musicCover:""
+            musicCover:"",
+
         });
 
         const [loading, setLoading] = useState(true);
         const [saving, setSaving] = useState(false);
         const [message, setMessage] = useState("");
-
         const [colorPickerOpen, setColorPickerOpen] = useState(null);
-
         const [links, setLinks] = useState([]);
         const [linksLoading, setLinksLoading] = useState(false);
         const [linkModalOpen, setLinkModalOpen] = useState(false);
         const [editingLink, setEditingLink] = useState(null);
+        const [username, setUsername] = useState(user.username);
+        const [newUsername, setNewUsername] = useState(user.username);
+        const [currentPassword, setCurrentPassword] = useState("");
+        const [newPassword, setNewPassword] = useState("");
+        const [confirmPassword, setConfirmPassword] = useState("");
+        const [settingsMessage, setSettingsMessage] = useState("");
+        const [settingsLoading, setSettingsLoading] = useState(false);
+
+        const [analytics, setAnalytics] = useState({
+            views: 0,
+            dailyViews: [],
+            loading: true,
+            error: ""
+        });
 
         const [linkForm, setLinkForm] = useState({
             title: "",
             url: "",
             icon: "github"
         });
+
+      
+useEffect(() => {
+    let cancelled = false;
+
+    async function loadAnalytics() {
+        try {
+            const response = await fetch("/api/analytics", {
+                cache: "no-store"
+            });
+
+            const data = await response.json();
+
+         if (!response.ok) {
+    console.error("Analytics API error:", {
+        status: response.status,
+        data
+    });
+
+    throw new Error(
+        `Analytics API error (${response.status}): ${
+            data.error || "Unknown error"
+        }`
+    );
+}
+            if (cancelled) return;
+
+            setAnalytics({
+                views: Number(data.views ?? 0),
+                dailyViews: Array.isArray(data.dailyViews)
+                    ? data.dailyViews
+                    : [],
+                loading: false,
+                error: ""
+            });
+        } catch (error) {
+            console.error("ANALYTICS_LOAD_ERROR:", error);
+
+            if (cancelled) return;
+
+            setAnalytics((prev) => ({
+                ...prev,
+                loading: false,
+                error: error.message || "Failed to load analytics."
+            }));
+        }
+    }
+
+    loadAnalytics();
+
+    return () => {
+        cancelled = true;
+    };
+}, []);
+
 
         useEffect(() => {
             async function loadProfile() {
@@ -489,6 +561,38 @@ async function uploadMusic(file) {
     }
 }
 
+async function saveUsername() {
+    setSettingsLoading(true);
+    setSettingsMessage("");
+
+    try {
+        const response = await fetch("/api/settings", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username: newUsername
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Failed to update username"
+            );
+        }
+
+        setUsername(data.user.username);
+        setNewUsername(data.user.username);
+        setSettingsMessage("Username updated successfully.");
+    } catch (error) {
+        setSettingsMessage(error.message);
+    } finally {
+        setSettingsLoading(false);
+    }
+}
 
     const saveProfile = async () => {
         setSaving(true);
@@ -647,9 +751,7 @@ async function uploadMusic(file) {
 
                         <div>
                             <strong>{user.username}</strong>
-                            <span>Free</span>
-                            <span>UID</span>
-                            <strong>#{user.uid}</strong>
+                            <span>UID #{user.uid}</span>
                         </div>
                     </div>
 
@@ -685,27 +787,17 @@ async function uploadMusic(file) {
                 </aside>
 
                 <section className="dashboard-content">
+               
                     {activeTab === "overview" && (
-                        <div className="dashboard-section">
+                        <div className="dashboard-section overview-section">
                             <div className="section-heading">
                                 <div>
-                                    <span className="eyebrow">
-                                        Dashboard
-                                    </span>
-
-                                    <h1>
-                                        Welcome, {user.username}
-                                    </h1>
-
-                                    <p>
-                                        Manage your Linxy profile and account.
-                                    </p>
+                                    <span className="eyebrow">Dashboard</span>
+                                    <h1>Welcome, {username}</h1>
+                                    <p>Manage your Linxy profile and account.</p>
                                 </div>
 
-                                <Link
-                                    className="view-profile"
-                                    href={`/${user.username}`}
-                                >
+                                <Link className="view-profile" href={`/${username}`}>
                                     View profile
                                 </Link>
                             </div>
@@ -713,21 +805,123 @@ async function uploadMusic(file) {
                             <div className="overview-grid">
                                 <div className="dashboard-card">
                                     <span>Username</span>
-                                    <strong>{user.username}</strong>
-                                </div>
-
-                                <div className="dashboard-card">
-                                    <span>Plan</span>
-                                    <strong>Free</strong>
+                                    <strong>{username}</strong>
                                 </div>
 
                                 <div className="dashboard-card">
                                     <span>Profile</span>
-                                    <strong>/{user.username}</strong>
+                                    <strong>/{username}</strong>
                                 </div>
+
+                                <div className="dashboard-card views-summary-card">
+                                    <span>Total views</span>
+
+                                    <strong>
+                                        {analytics.loading
+                                            ? "Loading..."
+                                            : analytics.error
+                                                ? "Unavailable"
+                                                : analytics.views.toLocaleString()}
+                                    </strong>
+
+                                    <small>
+                                        {analytics.error
+                                            ? analytics.error
+                                            : "All-time profile views"}
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div className="views-chart-card">
+                                <div className="views-chart-heading">
+                                    <div>
+                                        <h2>Profile views</h2>
+                                        <p>Daily activity over the last 7 days</p>
+                                    </div>
+
+                                    <span className="views-chart-period">Last 7 days</span>
+                                </div>
+
+                                {analytics.loading ? (
+                                    <p className="views-chart-message">
+                                        Loading analytics...
+                                    </p>
+                                ) : analytics.error ? (
+                                    <p className="views-chart-message">
+                                        Could not load profile views.
+                                    </p>
+                                ) : (
+                                    <>
+                                        <div className="views-chart">
+                                            {analytics.dailyViews.map((day) => {
+                                                const maxViews = Math.max(
+                                                    1,
+                                                    ...analytics.dailyViews.map(
+                                                        (item) => Number(item.views) || 0
+                                                    )
+                                                );
+
+                                                const count = Number(day.views) || 0;
+                                                const height = count > 0
+                                                    ? Math.max(8, (count / maxViews) * 100)
+                                                    : 3;
+
+                                                const date = new Date(`${day.date}T00:00:00Z`);
+
+                                                const dayLabel = date.toLocaleDateString(
+                                                    "en-US",
+                                                    {
+                                                        weekday: "short",
+                                                        timeZone: "UTC"
+                                                    }
+                                                );
+
+                                                return (
+                                                    <div
+                                                        className="views-chart-column"
+                                                        key={day.date}
+                                                    >
+                                                        <span className="views-chart-value">
+                                                            {count}
+                                                        </span>
+
+                                                        <div className="views-chart-bar-area">
+                                                            <div
+                                                                className={`views-chart-bar ${
+                                                                    count === maxViews && count > 0
+                                                                        ? "peak"
+                                                                        : ""
+                                                                }`}
+                                                                style={{ height: `${height}%` }}
+                                                                title={`${count} views`}
+                                                            />
+                                                        </div>
+
+                                                        <span className="views-chart-day">
+                                                            {dayLabel}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+
+                                        <div className="views-chart-footer">
+                                            <span>Views per day</span>
+
+                                            <strong>
+                                                {analytics.dailyViews.reduce(
+                                                    (total, day) =>
+                                                        total + (Number(day.views) || 0),
+                                                    0
+                                                ).toLocaleString()} views this week
+                                            </strong>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     )}
+
 
                     {activeTab === "profile" && (
                         <div className="dashboard-section">
@@ -1264,21 +1458,303 @@ async function uploadMusic(file) {
     </div>
 )}
 
-                    {activeTab === "settings" && (
-                        <div className="empty-section">
-                            <span className="eyebrow">Settings</span>
+                   
+{activeTab === "settings" && (
+    <div className="dashboard-section settings-page">
+        <div className="section-heading">
+            <div>
+                <span className="eyebrow">Settings</span>
+                <h1>Account settings</h1>
+                <p>Manage your account and security preferences.</p>
+            </div>
+        </div>
 
-                            <h1>Account settings</h1>
+        <div className="settings-layout">
+            <div className="settings-card">
+                <div className="settings-card-heading">
+                    <div>
+                        <h2>Account information</h2>
+                        <p>Your personal account details.</p>
+                    </div>
+                    <span className="settings-icon"><User/></span>
+                </div>
 
-                            <p>
-                                Manage your Linxy account.
-                            </p>
+                <div className="settings-info-row">
+                    <span>Username</span>
+                    <strong>{user.username}</strong>
+                </div>
 
-                            <span className="coming-soon">
-                                Coming soon
-                            </span>
-                        </div>
-                    )}
+                <div className="settings-info-row">
+                    <span>User ID</span>
+                    <strong>#{user.uid}</strong>
+                </div>
+
+                <div className="settings-info-row">
+                    <span>Email</span>
+                    <strong>{user.email}</strong>
+                </div>
+
+                <div className="settings-info-row">
+                    <span>Joined</span>
+                    <strong>
+                        {new Date(user.createdAt).toLocaleDateString()}
+                    </strong>
+                </div>
+            </div>
+
+            <div className="settings-card">
+                <div className="settings-card-heading">
+                    <div>
+                        <h2>Change username</h2>
+                        <p>Your username is used in your public profile URL.</p>
+                    </div>
+                    <span className="settings-icon"><Mail/></span>
+                </div>
+
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    saveUsername();
+                }}>
+                    <div className="form-group">
+                        <label htmlFor="settings-username">
+                            New username
+                        </label>
+                        <input
+                            id="settings-username"
+                            type="text"
+                            value={newUsername}
+                            onChange={(e) => setNewUsername(e.target.value)}
+                            minLength={3}
+                            maxLength={20}
+                            pattern="[a-zA-Z0-9_]+"
+                            autoComplete="username"
+                            required
+                        />
+                        <span className="field-hint">
+                            3–20 characters. Letters, numbers and underscores.
+                        </span>
+                    </div>
+
+                    <div className="settings-preview">
+                        <span>New profile URL</span>
+                        <strong>/{newUsername || user.username}</strong>
+                    </div>
+
+                    <button
+                        className="settings-primary-button"
+                        type="submit"
+                        disabled={settingsLoading ||
+                            newUsername.trim() === user.username}
+                    >
+                        {settingsLoading ? "Saving..." : "Save username"}
+                    </button>
+
+                    <p className="settings-message" aria-live="polite">
+                        {settingsMessage}
+                    </p>
+                </form>
+            </div>
+
+            <div className="settings-card">
+                <div className="settings-card-heading">
+                    <div>
+                        <h2>Change password</h2>
+                        <p>Choose a new password for your account.</p>
+                    </div>
+                    <span className="settings-icon"><RotateCcwKey/></span>
+                </div>
+
+                <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    setSettingsMessage("");
+
+                    if (newPassword !== confirmPassword) {
+                        setSettingsMessage("Passwords do not match.");
+                        return;
+                    }
+
+                    setSettingsLoading(true);
+
+                    try {
+                        const response = await fetch(
+                            "/api/settings/password",
+                            {
+                                method: "PATCH",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    currentPassword,
+                                    newPassword
+                                })
+                            }
+                        );
+
+                        const data = await response.json();
+
+                        if (!response.ok) {
+                            throw new Error(
+                                data.error || "Failed to change password."
+                            );
+                        }
+
+                        setCurrentPassword("");
+                        setNewPassword("");
+                        setConfirmPassword("");
+                        setSettingsMessage("Password changed successfully.");
+                    } catch (error) {
+                        setSettingsMessage(error.message);
+                    } finally {
+                        setSettingsLoading(false);
+                    }
+                }}>
+                    <div className="form-group">
+                        <label htmlFor="current-password">
+                            Current password
+                        </label>
+                        <input
+                            id="current-password"
+                            type="password"
+                            autoComplete="current-password"
+                            value={currentPassword}
+                            onChange={(e) =>
+                                setCurrentPassword(e.target.value)
+                            }
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="new-password">
+                            New password
+                        </label>
+                        <input
+                            id="new-password"
+                            type="password"
+                            autoComplete="new-password"
+                            minLength={8}
+                            value={newPassword}
+                            onChange={(e) =>
+                                setNewPassword(e.target.value)
+                            }
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="confirm-password">
+                            Confirm new password
+                        </label>
+                        <input
+                            id="confirm-password"
+                            type="password"
+                            autoComplete="new-password"
+                            minLength={8}
+                            value={confirmPassword}
+                            onChange={(e) =>
+                                setConfirmPassword(e.target.value)
+                            }
+                            required
+                        />
+                    </div>
+
+                    <button
+                        className="settings-primary-button"
+                        type="submit"
+                        disabled={settingsLoading}
+                    >
+                        {settingsLoading ? "Updating..." : "Update password"}
+                    </button>
+
+                    <p className="settings-message" aria-live="polite">
+                        {settingsMessage}
+                    </p>
+                </form>
+            </div>
+
+            <div className="settings-card settings-danger-card">
+                <div className="settings-card-heading">
+                    <div>
+                        <h2>Delete account</h2>
+                        <p>
+                            Permanently delete your Linxy account and
+                            associated data.
+                        </p>
+                    </div>
+                    <span className="settings-icon"><Trash/></span>
+                </div>
+
+                <p className="settings-danger-warning">
+                    This action cannot be undone. Your profile and account
+                    data may be permanently removed.
+                </p>
+
+        
+                <button
+                    type="button"
+                    className="settings-danger-button"
+                    onClick={async () => {
+                        const confirmed = window.confirm(
+                            "Are you sure you want to permanently delete your account?"
+                        );
+
+                        if (!confirmed) return;
+
+                        const password = window.prompt(
+                            "Enter your current password to confirm deletion:"
+                        );
+
+                        if (password === null) return;
+
+                        if (!password.trim()) {
+                            setSettingsMessage("Password is required.");
+                            return;
+                        }
+
+                        setSettingsLoading(true);
+                        setSettingsMessage("");
+
+                        try {
+                            const response = await fetch(
+                                "/api/settings/delete-account",
+                                {
+                                    method: "DELETE",
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    },
+                                    body: JSON.stringify({ password })
+                                }
+                            );
+
+                            const data = await response.json();
+
+                            if (!response.ok) {
+                                throw new Error(
+                                    data.error || "Failed to delete account."
+                                );
+                            }
+
+                            window.location.replace("/");
+                        } catch (error) {
+                            setSettingsMessage(error.message);
+                        } finally {
+                            setSettingsLoading(false);
+                        }
+                    }}
+                    disabled={settingsLoading}
+                >
+                    {settingsLoading ? "Deleting..." : "Delete account"}
+                </button>
+
+                <p className="settings-message" aria-live="polite">
+                    {settingsMessage}
+                </p>
+
+            </div>
+        </div>
+    </div>
+)}
+
                 </section>
             </main>
         );

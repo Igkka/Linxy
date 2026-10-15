@@ -20,15 +20,13 @@ export default function HeaderClient({ user }) {
                 <img
                     className="logoheader"
                     src="/logo.png"
-                    alt="Linc"
+                    alt="Linxy"
                 />
 
                 <h1>Linxy</h1>
             </a>
 
             <div className="linkssite">
-                <a href="#support">Support</a>
-                <a href="#prices">Prices</a>
 
                 {user ? (
                     <div className="user-menu">

@@ -28,12 +28,13 @@ model Profile {
     backgroundType   String?
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
-    musicUrl    String?
-    musicTitle  String?
-    musicArtist String?
-    musicCover  String?
-    views Int @default(0)
-    links ProfileLink[]
+    musicUrl        String?
+    musicTitle      String?
+    musicArtist     String?
+    musicCover      String?
+    views           Int            @default(0)
+    links           ProfileLink[]
+    viewEvents      ProfileView[]
 }
 model User {
     id           String   @id @default(cuid())
@@ -58,4 +59,16 @@ model ProfileLink {
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+}
+
+model ProfileView {
+  id        String   @id @default(cuid())
+  profileId String
+  visitorId String
+  viewedAt  DateTime @default(now())
+
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId, viewedAt])
+  @@index([profileId, visitorId, viewedAt])
 }

@@ -11,4 +11,5 @@
 export type * from './models/Profile.ts'
 export type * from './models/User.ts'
 export type * from './models/ProfileLink.ts'
+export type * from './models/ProfileView.ts'
 export type * from './commonInputTypes.ts'

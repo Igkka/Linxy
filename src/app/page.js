@@ -10,7 +10,6 @@ export default function Home() {
     <div className={styles.page}>
       <Header/>
       <HomePage/>
-      <PricesPage/>
       <Footer/>
     </div>
   );
