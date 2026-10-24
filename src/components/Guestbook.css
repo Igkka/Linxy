@@ -1,0 +1,203 @@
+
+/* Main guestbook */
+.guestbook {
+    width: 100%;
+    max-width: 620px;
+    margin: 120px auto 0;
+    color: #fff;
+    text-align: left;
+}
+
+/* Form — its own background */
+.guestbook-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background: #0d0d0d;
+    border: 1px solid #252525;
+    border-radius: 14px;
+}
+
+.guestbook-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+
+/* Comment input */
+.guestbook-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 0;
+    border: none;
+    border-bottom: 1px solid #333;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+}
+
+.guestbook-form textarea {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #292929;
+    border-radius: 9px;
+    outline: none;
+    background: #151515;
+    color: #fff;
+    font: inherit;
+    font-size: 13px;
+    resize: vertical;
+}
+
+.guestbook-form textarea:focus {
+    border-color: #505050;
+}
+
+.guestbook-form input::placeholder,
+.guestbook-form textarea::placeholder {
+    color: #777;
+}
+
+/* Character counter and send button */
+.guestbook-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.guestbook-form-footer span {
+    color: #888;
+    font-size: 12px;
+}
+
+.guestbook-form-footer button {
+    padding: 10px 17px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    color: #000;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.guestbook-form-footer button:hover {
+    background: #ddd;
+}
+
+.guestbook-form-footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Separate comments area */
+.guestbook-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 18px;
+    background: #080808;
+    border: 1px solid #202020;
+    border-radius: 14px;
+}
+
+/* Individual comment */
+.guestbook-message {
+    position: relative;
+    padding: 16px;
+    background: #131313;
+    border: 1px solid #282828;
+    border-radius: 10px;
+    overflow-wrap: anywhere;
+}
+
+.guestbook-message-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-right: 30px;
+}
+
+.guestbook-message-header strong {
+    color: #fff;
+    font-size: 13px;
+}
+
+.guestbook-message-header time {
+    color: #888;
+    font-size: 11px;
+}
+
+.guestbook-message > p {
+    margin: 10px 0 0;
+    color: #ddd;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.guestbook-muted {
+    margin: 0;
+    padding: 14px 0;
+    color: #888;
+    font-size: 12px;
+    text-align: center;
+}
+
+.guestbook-error {
+    color: #ff7777;
+    font-size: 12px;
+}
+
+.guestbook-notice {
+    color: #a3e6a3;
+    font-size: 12px;
+}
+
+/* Trash icon */
+.guestbook-delete {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: #888;
+    cursor: pointer;
+}
+
+.guestbook-delete:hover {
+    color: #ff6464;
+    background: #292020;
+}
+
+@media (max-width: 480px) {
+    .guestbook-form {
+        padding: 15px;
+    }
+
+    .guestbook-messages {
+        margin-top: 22px;
+        padding: 12px;
+    }
+}

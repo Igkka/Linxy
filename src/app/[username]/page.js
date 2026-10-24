@@ -5,6 +5,8 @@ import "./user.css";
 import MusicPlayer from "./MusicPlayer";
 import ProfileEntry from "./ProfileEntry";
 import ProfileViews from "./ProfileViews";
+import Guestbook from "../../components/Guestbook";
+import { getCurrentUser } from "../../../lib/auth";
 
 import {
     siGithub,
@@ -93,23 +95,26 @@ export default async function UserPage({ params }) {
     const user = await prisma.user.findUnique({
         where: { username },
         select: {
-            uid: true,
-            username: true,
-            profile: {
-                include: {
-                    links: {
-                        orderBy: {
-                            position: "asc"
+                id: true,
+                uid: true,
+                username: true,
+                profile: {
+                    include: {
+                        links: {
+                            orderBy: {
+                                position: "asc"
+                            }
                         }
                     }
                 }
-            }
         }
     });
 
     if (!user) {
         notFound();
     }
+    const currentUser = await getCurrentUser();
+    const isOwner = currentUser?.id === user.id;
 
     const profile = user.profile;
 
@@ -206,6 +211,10 @@ export default async function UserPage({ params }) {
                     )}
                     <ProfileViews initialViews={profile?.views ?? 0} />
                 </div>
+                    <Guestbook
+                        username={user.username}
+                        isOwner={isOwner}
+                    />
             </div>
         </main>
         </ProfileEntry>

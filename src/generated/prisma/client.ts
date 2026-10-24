@@ -61,3 +61,8 @@ export type ProfileLink = Prisma.ProfileLinkModel
  * 
  */
 export type ProfileView = Prisma.ProfileViewModel
+/**
+ * Model GuestbookMessage
+ * 
+ */
+export type GuestbookMessage = Prisma.GuestbookMessageModel

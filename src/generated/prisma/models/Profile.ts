@@ -315,6 +315,7 @@ export type ProfileWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   links?: Prisma.ProfileLinkListRelationFilter
   viewEvents?: Prisma.ProfileViewListRelationFilter
+  guestbookMessages?: Prisma.GuestbookMessageListRelationFilter
 }
 
 export type ProfileOrderByWithRelationInput = {
@@ -338,6 +339,7 @@ export type ProfileOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   links?: Prisma.ProfileLinkOrderByRelationAggregateInput
   viewEvents?: Prisma.ProfileViewOrderByRelationAggregateInput
+  guestbookMessages?: Prisma.GuestbookMessageOrderByRelationAggregateInput
 }
 
 export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -364,6 +366,7 @@ export type ProfileWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   links?: Prisma.ProfileLinkListRelationFilter
   viewEvents?: Prisma.ProfileViewListRelationFilter
+  guestbookMessages?: Prisma.GuestbookMessageListRelationFilter
 }, "id" | "userId">
 
 export type ProfileOrderByWithAggregationInput = {
@@ -434,6 +437,7 @@ export type ProfileCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutProfileInput
   links?: Prisma.ProfileLinkCreateNestedManyWithoutProfileInput
   viewEvents?: Prisma.ProfileViewCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateInput = {
@@ -456,6 +460,7 @@ export type ProfileUncheckedCreateInput = {
   views?: number
   links?: Prisma.ProfileLinkUncheckedCreateNestedManyWithoutProfileInput
   viewEvents?: Prisma.ProfileViewUncheckedCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUpdateInput = {
@@ -478,6 +483,7 @@ export type ProfileUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
   links?: Prisma.ProfileLinkUpdateManyWithoutProfileNestedInput
   viewEvents?: Prisma.ProfileViewUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateInput = {
@@ -500,6 +506,7 @@ export type ProfileUncheckedUpdateInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.ProfileLinkUncheckedUpdateManyWithoutProfileNestedInput
   viewEvents?: Prisma.ProfileViewUncheckedUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateManyInput = {
@@ -719,6 +726,20 @@ export type ProfileUpdateOneRequiredWithoutViewEventsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutViewEventsInput, Prisma.ProfileUpdateWithoutViewEventsInput>, Prisma.ProfileUncheckedUpdateWithoutViewEventsInput>
 }
 
+export type ProfileCreateNestedOneWithoutGuestbookMessagesInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutGuestbookMessagesInput, Prisma.ProfileUncheckedCreateWithoutGuestbookMessagesInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutGuestbookMessagesInput
+  connect?: Prisma.ProfileWhereUniqueInput
+}
+
+export type ProfileUpdateOneRequiredWithoutGuestbookMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutGuestbookMessagesInput, Prisma.ProfileUncheckedCreateWithoutGuestbookMessagesInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutGuestbookMessagesInput
+  upsert?: Prisma.ProfileUpsertWithoutGuestbookMessagesInput
+  connect?: Prisma.ProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutGuestbookMessagesInput, Prisma.ProfileUpdateWithoutGuestbookMessagesInput>, Prisma.ProfileUncheckedUpdateWithoutGuestbookMessagesInput>
+}
+
 export type ProfileCreateWithoutUserInput = {
   id?: string
   description?: string | null
@@ -738,6 +759,7 @@ export type ProfileCreateWithoutUserInput = {
   views?: number
   links?: Prisma.ProfileLinkCreateNestedManyWithoutProfileInput
   viewEvents?: Prisma.ProfileViewCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateWithoutUserInput = {
@@ -759,6 +781,7 @@ export type ProfileUncheckedCreateWithoutUserInput = {
   views?: number
   links?: Prisma.ProfileLinkUncheckedCreateNestedManyWithoutProfileInput
   viewEvents?: Prisma.ProfileViewUncheckedCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileCreateOrConnectWithoutUserInput = {
@@ -796,6 +819,7 @@ export type ProfileUpdateWithoutUserInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.ProfileLinkUpdateManyWithoutProfileNestedInput
   viewEvents?: Prisma.ProfileViewUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutUserInput = {
@@ -817,6 +841,7 @@ export type ProfileUncheckedUpdateWithoutUserInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.ProfileLinkUncheckedUpdateManyWithoutProfileNestedInput
   viewEvents?: Prisma.ProfileViewUncheckedUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateWithoutLinksInput = {
@@ -838,6 +863,7 @@ export type ProfileCreateWithoutLinksInput = {
   views?: number
   user: Prisma.UserCreateNestedOneWithoutProfileInput
   viewEvents?: Prisma.ProfileViewCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateWithoutLinksInput = {
@@ -859,6 +885,7 @@ export type ProfileUncheckedCreateWithoutLinksInput = {
   musicCover?: string | null
   views?: number
   viewEvents?: Prisma.ProfileViewUncheckedCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileCreateOrConnectWithoutLinksInput = {
@@ -896,6 +923,7 @@ export type ProfileUpdateWithoutLinksInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
   viewEvents?: Prisma.ProfileViewUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutLinksInput = {
@@ -917,6 +945,7 @@ export type ProfileUncheckedUpdateWithoutLinksInput = {
   musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   viewEvents?: Prisma.ProfileViewUncheckedUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateWithoutViewEventsInput = {
@@ -938,6 +967,7 @@ export type ProfileCreateWithoutViewEventsInput = {
   views?: number
   user: Prisma.UserCreateNestedOneWithoutProfileInput
   links?: Prisma.ProfileLinkCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateWithoutViewEventsInput = {
@@ -959,6 +989,7 @@ export type ProfileUncheckedCreateWithoutViewEventsInput = {
   musicCover?: string | null
   views?: number
   links?: Prisma.ProfileLinkUncheckedCreateNestedManyWithoutProfileInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileCreateOrConnectWithoutViewEventsInput = {
@@ -996,6 +1027,7 @@ export type ProfileUpdateWithoutViewEventsInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
   links?: Prisma.ProfileLinkUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutViewEventsInput = {
@@ -1017,6 +1049,111 @@ export type ProfileUncheckedUpdateWithoutViewEventsInput = {
   musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   views?: Prisma.IntFieldUpdateOperationsInput | number
   links?: Prisma.ProfileLinkUncheckedUpdateManyWithoutProfileNestedInput
+  guestbookMessages?: Prisma.GuestbookMessageUncheckedUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileCreateWithoutGuestbookMessagesInput = {
+  id?: string
+  description?: string | null
+  avatar?: string | null
+  background?: string | null
+  font?: string | null
+  textColor?: string | null
+  descriptionColor?: string | null
+  iconColor?: string | null
+  backgroundType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  musicUrl?: string | null
+  musicTitle?: string | null
+  musicArtist?: string | null
+  musicCover?: string | null
+  views?: number
+  user: Prisma.UserCreateNestedOneWithoutProfileInput
+  links?: Prisma.ProfileLinkCreateNestedManyWithoutProfileInput
+  viewEvents?: Prisma.ProfileViewCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileUncheckedCreateWithoutGuestbookMessagesInput = {
+  id?: string
+  userId: string
+  description?: string | null
+  avatar?: string | null
+  background?: string | null
+  font?: string | null
+  textColor?: string | null
+  descriptionColor?: string | null
+  iconColor?: string | null
+  backgroundType?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  musicUrl?: string | null
+  musicTitle?: string | null
+  musicArtist?: string | null
+  musicCover?: string | null
+  views?: number
+  links?: Prisma.ProfileLinkUncheckedCreateNestedManyWithoutProfileInput
+  viewEvents?: Prisma.ProfileViewUncheckedCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileCreateOrConnectWithoutGuestbookMessagesInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutGuestbookMessagesInput, Prisma.ProfileUncheckedCreateWithoutGuestbookMessagesInput>
+}
+
+export type ProfileUpsertWithoutGuestbookMessagesInput = {
+  update: Prisma.XOR<Prisma.ProfileUpdateWithoutGuestbookMessagesInput, Prisma.ProfileUncheckedUpdateWithoutGuestbookMessagesInput>
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutGuestbookMessagesInput, Prisma.ProfileUncheckedCreateWithoutGuestbookMessagesInput>
+  where?: Prisma.ProfileWhereInput
+}
+
+export type ProfileUpdateToOneWithWhereWithoutGuestbookMessagesInput = {
+  where?: Prisma.ProfileWhereInput
+  data: Prisma.XOR<Prisma.ProfileUpdateWithoutGuestbookMessagesInput, Prisma.ProfileUncheckedUpdateWithoutGuestbookMessagesInput>
+}
+
+export type ProfileUpdateWithoutGuestbookMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  font?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backgroundType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicArtist?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  user?: Prisma.UserUpdateOneRequiredWithoutProfileNestedInput
+  links?: Prisma.ProfileLinkUpdateManyWithoutProfileNestedInput
+  viewEvents?: Prisma.ProfileViewUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileUncheckedUpdateWithoutGuestbookMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  background?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  font?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  textColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  descriptionColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  iconColor?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  backgroundType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  musicUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicArtist?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  musicCover?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  links?: Prisma.ProfileLinkUncheckedUpdateManyWithoutProfileNestedInput
+  viewEvents?: Prisma.ProfileViewUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 
@@ -1027,11 +1164,13 @@ export type ProfileUncheckedUpdateWithoutViewEventsInput = {
 export type ProfileCountOutputType = {
   links: number
   viewEvents: number
+  guestbookMessages: number
 }
 
 export type ProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   links?: boolean | ProfileCountOutputTypeCountLinksArgs
   viewEvents?: boolean | ProfileCountOutputTypeCountViewEventsArgs
+  guestbookMessages?: boolean | ProfileCountOutputTypeCountGuestbookMessagesArgs
 }
 
 /**
@@ -1058,6 +1197,13 @@ export type ProfileCountOutputTypeCountViewEventsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.ProfileViewWhereInput
 }
 
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeCountGuestbookMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GuestbookMessageWhereInput
+}
+
 
 export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1080,6 +1226,7 @@ export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   links?: boolean | Prisma.Profile$linksArgs<ExtArgs>
   viewEvents?: boolean | Prisma.Profile$viewEventsArgs<ExtArgs>
+  guestbookMessages?: boolean | Prisma.Profile$guestbookMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
 
@@ -1150,6 +1297,7 @@ export type ProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   links?: boolean | Prisma.Profile$linksArgs<ExtArgs>
   viewEvents?: boolean | Prisma.Profile$viewEventsArgs<ExtArgs>
+  guestbookMessages?: boolean | Prisma.Profile$guestbookMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1165,6 +1313,7 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     user: Prisma.$UserPayload<ExtArgs>
     links: Prisma.$ProfileLinkPayload<ExtArgs>[]
     viewEvents: Prisma.$ProfileViewPayload<ExtArgs>[]
+    guestbookMessages: Prisma.$GuestbookMessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1581,6 +1730,7 @@ export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends runtime.
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   links<T extends Prisma.Profile$linksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$linksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProfileLinkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   viewEvents<T extends Prisma.Profile$viewEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$viewEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProfileViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  guestbookMessages<T extends Prisma.Profile$guestbookMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$guestbookMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GuestbookMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2073,6 +2223,30 @@ export type Profile$viewEventsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ProfileViewScalarFieldEnum | Prisma.ProfileViewScalarFieldEnum[]
+}
+
+/**
+ * Profile.guestbookMessages
+ */
+export type Profile$guestbookMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GuestbookMessage
+   */
+  select?: Prisma.GuestbookMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GuestbookMessage
+   */
+  omit?: Prisma.GuestbookMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GuestbookMessageInclude<ExtArgs> | null
+  where?: Prisma.GuestbookMessageWhereInput
+  orderBy?: Prisma.GuestbookMessageOrderByWithRelationInput | Prisma.GuestbookMessageOrderByWithRelationInput[]
+  cursor?: Prisma.GuestbookMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GuestbookMessageScalarFieldEnum | Prisma.GuestbookMessageScalarFieldEnum[]
 }
 
 /**

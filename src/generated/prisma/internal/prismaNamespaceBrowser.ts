@@ -54,7 +54,8 @@ export const ModelName = {
   Profile: 'Profile',
   User: 'User',
   ProfileLink: 'ProfileLink',
-  ProfileView: 'ProfileView'
+  ProfileView: 'ProfileView',
+  GuestbookMessage: 'GuestbookMessage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -130,6 +131,20 @@ export const ProfileViewScalarFieldEnum = {
 } as const
 
 export type ProfileViewScalarFieldEnum = (typeof ProfileViewScalarFieldEnum)[keyof typeof ProfileViewScalarFieldEnum]
+
+
+export const GuestbookMessageScalarFieldEnum = {
+  id: 'id',
+  profileId: 'profileId',
+  authorId: 'authorId',
+  authorName: 'authorName',
+  content: 'content',
+  isHidden: 'isHidden',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GuestbookMessageScalarFieldEnum = (typeof GuestbookMessageScalarFieldEnum)[keyof typeof GuestbookMessageScalarFieldEnum]
 
 
 export const SortOrder = {
