@@ -200,4 +200,11 @@
         margin-top: 22px;
         padding: 12px;
     }
+    .guestbook {
+    width: 100%;
+    max-width: 620px;
+    margin: 150px auto 0;
+    color: #fff;
+    text-align: left;
+}
 }
