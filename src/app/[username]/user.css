@@ -75,9 +75,6 @@
     align-items: center;
     text-align: center;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: rgba(20, 20, 20, 0.48);
-    backdrop-filter: blur(22px);
 }
 
 .user-avatar {
@@ -89,8 +86,6 @@
     justify-content: center;
     overflow: hidden;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
     font-size: 36px;
     font-weight: 700;
 }
@@ -198,12 +193,6 @@
     align-items: center;
     gap: 12px;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 16px;
-    background: rgba(20, 20, 20, 0.66);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
 }
 
 .music-cover {
@@ -216,7 +205,6 @@
     overflow: hidden;
     border-radius: 10px;
     color: rgba(255, 255, 255, 0.85);
-    background: rgba(255, 255, 255, 0.09);
 }
 
 .music-cover img {
@@ -399,9 +387,6 @@
     padding: 24px;
 
     color: #fff;
-    background: rgba(0, 0, 0, 0.35);
-    -webkit-backdrop-filter: blur(24px);
-    backdrop-filter: blur(24px);
 
     border: none;
     cursor: pointer;
@@ -444,11 +429,7 @@
     row-gap: 10px;
 
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 16px;
-    background: rgba(20, 20, 20, 0.66);
-    backdrop-filter: blur(22px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.16);
 }
 
 

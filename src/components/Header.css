@@ -137,6 +137,22 @@ header {
     background: rgba(255, 255, 255, 0.08);
 }
 
+.site-header {
+    overflow: visible !important;
+}
+
+.site-header .user-menu {
+    position: relative;
+    overflow: visible;
+}
+
+.site-header .user-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 9999;
+}
+
 @media (max-width: 700px){
     .usernameheader{
         display: none;

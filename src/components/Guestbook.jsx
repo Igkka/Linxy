@@ -126,7 +126,7 @@ export default function Guestbook({ username, isOwner = false }) {
                 <span>{messages.length} / 50</span>
             </div>
 
-            <form className="guestbook-form" onSubmit={handleSubmit}>
+            <form className="guestbook-form guestbook-glass-item" onSubmit={handleSubmit}>
                 <textarea
                     value={content}
                     onChange={(event) => setContent(event.target.value)}
@@ -168,9 +168,9 @@ export default function Guestbook({ username, isOwner = false }) {
                 ) : (
                     messages.map((message) => (
                         <article
-                            className="guestbook-message"
+                            className="guestbook-message guestbook-glass-item"
                             key={message.id}
-                        >
+                        >   
                             <div className="guestbook-message-header">
                                 <strong>{message.authorName}</strong>
 
