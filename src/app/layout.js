@@ -1,6 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "@dpawlikowski/liquid-glass/css"
+import "@dpawlikowski/liquid-glass/css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,13 +16,21 @@ export const metadata = {
   metadataBase: new URL("https://linxy.fun"),
 
   title: {
-    default: "Linxy - Create Your Personal Profile",
+    default: "Linxy — Create Your Personal Profile",
     template: "%s | Linxy",
   },
 
   description:
     "Linxy is a personal profile platform where you can create and customize your own unique profile page.",
-  
+
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
+
   verification: {
     google: "NvLLcruVHXlwxwQ4Ap5YT_1bZiWLIWwzQdYcu32csVc",
   },
@@ -64,7 +72,7 @@ export const metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Linxy - Create Your Personal Profile",
+    title: "Linxy — Create Your Personal Profile",
     description:
       "Create and customize your own personal profile page with Linxy.",
   },
