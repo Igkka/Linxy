@@ -21,8 +21,6 @@ export default function Footer() {
 
                     <div className="footer-column">
                         <h4>Product</h4>
-
-                        <a href="#prices">Prices</a>
                         <a href="/reg">Registration</a>
                         <a href="/login">Log In</a>
                     </div>
@@ -46,7 +44,7 @@ export default function Footer() {
                         </a>
 
                         <a
-                            href="https://t.me/gykkozz"
+                            href="https://t.me/UID237"
                             target="_blank"
                             rel="noopener noreferrer"
                         >

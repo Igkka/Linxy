@@ -51,7 +51,7 @@ export default function RegisterPage() {
         <main className="auth-page">
             <div className="auth-box">
 
-                <h1>Create your Linc</h1>
+                <h1>Create your Linxy</h1>
 
                 <p className="auth-description">
                     Create your personal space on the internet.

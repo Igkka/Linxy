@@ -52,7 +52,7 @@ export default function LoginPage() {
                 <h1>Welcome back</h1>
 
                 <p className="auth-description">
-                    Log in to your Linc account.
+                    Log in to your Linxy account.
                 </p>
 
                 <form onSubmit={handleSubmit}>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { LiquidGlass } from "@dpawlikowski/liquid-glass/react";
 
 export default function HeaderClient({ user }) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function HeaderClient({ user }) {
     }
 
     return (
-        <header>
+        <LiquidGlass intensity="vivid" as="header" className="site-header">
             <a href="/" className="logo">
                 <img
                     className="logoheader"
@@ -73,6 +74,6 @@ export default function HeaderClient({ user }) {
                     </>
                 )}
             </div>
-        </header>
+        </LiquidGlass>
     );
 }

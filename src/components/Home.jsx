@@ -19,7 +19,6 @@ export default function HomePage(){
                 <p className="homedesc">Create your own digital space, shape every detail, share what you love, and let people discover the person behind the profile</p>
                 <div className="homebtns">
                     <a href="/reg" className="homebtn">Join Now</a>
-                    <a href="#prices" className="homebtn">View prices</a>
                     
                 </div>
             </div>

@@ -42,7 +42,7 @@
     pointer-events: none;
     z-index: 1;
 }
-
+    
 .homecontent {
     position: relative;
     z-index: 2;
@@ -103,6 +103,39 @@
 
 .homebtn {
     transform: scale(0.98);
+}
+
+.site-header {
+    --lg-tint: 8 8 8;
+    --lg-opacity: 0.12;
+    --lg-blur: 12px;
+    --lg-saturate: 180%;
+    --lg-radius: 18px;
+    --lg-border-opacity: 0.2;
+}
+
+.site-header {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: 1400px;
+    z-index: 1000;
+}
+
+.site-header .liquid-glass__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 24px;
+    box-sizing: border-box;
+}
+
+.site-header::before,
+.site-header::after {
+    display: none !important;
 }
 
 @media (max-width: 700px){

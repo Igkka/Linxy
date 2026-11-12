@@ -533,3 +533,78 @@
     flex-shrink: 0;
     opacity: 0.8;
 }
+
+
+/* Liquid Glass */
+
+.user-glass {
+    --lg-tint: 8 8 8;
+    --lg-opacity: 0.12;
+    --lg-blur: 12px;
+    --lg-saturate: 180%;
+    --lg-radius: 20px;
+    --lg-border-opacity: 0.2;
+
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.user-glass-content {
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* Profile */
+
+.profile-glass {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.profile-glass .user-glass-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 35px 25px;
+}
+
+/* Music */
+
+.music-glass {
+    max-width: 400px;
+    margin: 0 auto 25px;
+}
+
+.music-glass .user-glass-content {
+    padding: 15px;
+}
+
+/* Guestbook */
+
+.guestbook-glass {
+    max-width: 750px;
+    margin: 30px auto 0;
+}
+
+.guestbook-glass .user-glass-content {
+    padding: 25px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .profile-glass .user-glass-content {
+        padding: 25px 15px;
+    }
+
+    .guestbook-glass .user-glass-content {
+        padding: 15px;
+    }
+
+    .music-glass {
+        max-width: 100%;
+    }
+}

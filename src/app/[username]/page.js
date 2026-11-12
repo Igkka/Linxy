@@ -7,6 +7,7 @@ import ProfileEntry from "./ProfileEntry";
 import ProfileViews from "./ProfileViews";
 import Guestbook from "../../components/Guestbook";
 import { getCurrentUser } from "../../../lib/auth";
+import { LiquidGlass } from "@dpawlikowski/liquid-glass/react";
 
 import {
     siGithub,
@@ -146,14 +147,27 @@ export default async function UserPage({ params }) {
             ) : null}
 
             <div className="user-content">
-                <MusicPlayer
-                    musicUrl={profile?.musicUrl}
-                    title={profile?.musicTitle}
-                    artist={profile?.musicArtist}
-                    cover={profile?.musicCover}
-                />
-
+                <LiquidGlass
+                    as="div"
+                    intensity="vivid"
+                    className="user-glass music-glass"
+                >
+                    <div className="user-glass-content">
+                        <MusicPlayer
+                            musicUrl={profile?.musicUrl}
+                            title={profile?.musicTitle}
+                            artist={profile?.musicArtist}
+                            cover={profile?.musicCover}
+                        />
+                    </div>
+                </LiquidGlass>
                 <div className="user-profile">
+                    <LiquidGlass
+                        as="div"
+                        intensity="vivid"
+                        className="user-glass profile-glass"
+                    >
+                    <div className="user-glass-content">
                     <div className="user-avatar">
                         {profile?.avatar ? (
                             <img
@@ -210,11 +224,21 @@ export default async function UserPage({ params }) {
                         </div>
                     )}
                     <ProfileViews initialViews={profile?.views ?? 0} />
+                    </div>
+                    </LiquidGlass>
                 </div>
-                    <Guestbook
-                        username={user.username}
-                        isOwner={isOwner}
-                    />
+                    <LiquidGlass
+                        as="div"
+                        intensity="vivid"
+                        className="user-glass guestbook-glass"
+                    >
+                        <div className="user-glass-content">
+                            <Guestbook
+                                username={user.username}
+                                isOwner={isOwner}
+                            />
+                        </div>
+                    </LiquidGlass>
             </div>
         </main>
         </ProfileEntry>
