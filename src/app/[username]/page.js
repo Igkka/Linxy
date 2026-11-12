@@ -227,18 +227,11 @@ export default async function UserPage({ params }) {
                     </div>
                     </LiquidGlass>
                 </div>
-                    <LiquidGlass
-                        as="div"
-                        intensity="vivid"
-                        className="user-glass guestbook-glass"
-                    >
-                        <div className="user-glass-content">
                             <Guestbook
                                 username={user.username}
                                 isOwner={isOwner}
                             />
-                        </div>
-                    </LiquidGlass>
+
             </div>
         </main>
         </ProfileEntry>

@@ -589,3 +589,26 @@
         max-width: 100%;
     }
 }
+
+.user-glass,
+.profile-glass,
+.music-glass,
+.guestbook-glass,
+.guestbook-item-glass {
+    filter: none !important;
+    --lg-aberration: 0;
+    --lg-chromatic-aberration: 0;
+}
+
+.user-glass::before,
+.user-glass::after,
+.profile-glass::before,
+.profile-glass::after,
+.music-glass::before,
+.music-glass::after,
+.guestbook-glass::before,
+.guestbook-glass::after,
+.guestbook-item-glass::before,
+.guestbook-item-glass::after {
+    display: none !important;
+}

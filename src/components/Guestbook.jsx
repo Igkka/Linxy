@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useState } from "react";
 import "./Guestbook.css";
 import { Trash2 } from "lucide-react";
+import { LiquidGlass } from "@dpawlikowski/liquid-glass/react";
 
 export default function Guestbook({ username, isOwner = false }) {
     const [messages, setMessages] = useState([]);
@@ -125,8 +126,8 @@ export default function Guestbook({ username, isOwner = false }) {
                 <h2>Guestbook</h2>
                 <span>{messages.length} / 50</span>
             </div>
-
-            <form className="guestbook-form guestbook-glass-item" onSubmit={handleSubmit}>
+            <LiquidGlass as="div" intensity="vivid" className="guestbook-item-glass">
+                <form className="guestbook-form" onSubmit={handleSubmit}>
                 <textarea
                     value={content}
                     onChange={(event) => setContent(event.target.value)}
@@ -144,7 +145,8 @@ export default function Guestbook({ username, isOwner = false }) {
                         {sending ? "Sending..." : "Send message"}
                     </button>
                 </div>
-            </form>
+                </form>
+                </LiquidGlass>
 
             {error && (
                 <p className="guestbook-error" role="alert">
@@ -167,10 +169,12 @@ export default function Guestbook({ username, isOwner = false }) {
                     </p>
                 ) : (
                     messages.map((message) => (
-                        <article
-                            className="guestbook-message guestbook-glass-item"
-                            key={message.id}
-                        >   
+                        <LiquidGlass
+                            as="div"
+                            intensity="vivid"
+                            className="guestbook-item-glass"
+                        >
+                        <article className="guestbook-message" key={message.id}>
                             <div className="guestbook-message-header">
                                 <strong>{message.authorName}</strong>
 
@@ -197,6 +201,7 @@ export default function Guestbook({ username, isOwner = false }) {
 
                             )}
                         </article>
+                        </LiquidGlass>
                     ))
                 )}
             </div>
