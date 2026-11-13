@@ -334,9 +334,6 @@
 }
 
 @media (max-width: 480px) {
-    .user-page {
-        padding: 200px 14px;
-    }
 
     .user-content {
         gap: 12px;
@@ -378,24 +375,27 @@
 
 @media (max-width: 480px) {
     .user-hero {
+        width: 100%;
         min-height: 100svh;
-        padding: 120px 14px 60px;
+        padding: 120px 0 60px;
+        margin: 0;
+    }
+
+    .user-background-video,
+    .user-background-image {
+        width: 100%;
+        inset: 0;
     }
 
     .user-content {
+        width: 100%;
+        padding: 0 14px;
         gap: 12px;
     }
 
     .user-guestbook-section {
+        width: 100%;
         padding: 1px 14px 60px;
-    }
-
-    .user-profile {
-        padding: 28px 20px;
-    }
-
-    .music-glass {
-        max-width: 100%;
     }
 }
 
