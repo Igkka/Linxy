@@ -373,6 +373,14 @@
     .user-links {
         gap: 15px;
     }
+    .user-hero {
+        padding: 200px 14px;
+        min-height: 550px;
+    }
+
+    .user-guestbook-section {
+        padding: 1px 14px 60px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
