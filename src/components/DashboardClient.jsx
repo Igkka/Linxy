@@ -1117,7 +1117,7 @@ async function saveUsername() {
                                         </div>
 
                                         <div className="color-control">
-                                            <label>Icon color</label>
+                                            <label>Links color</label>
 
                                             <ColorPicker
                                                 value={profile.iconColor}

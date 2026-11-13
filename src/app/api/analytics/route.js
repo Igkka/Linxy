@@ -22,13 +22,6 @@ export async function GET() {
             }
         });
 
-        if (!profile) {
-            return NextResponse.json(
-                { error: "Profile not found." },
-                { status: 404 }
-            );
-        }
-
         const today = new Date();
         today.setUTCHours(0, 0, 0, 0);
 

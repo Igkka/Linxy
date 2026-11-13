@@ -128,6 +128,7 @@ export default async function UserPage({ params }) {
                 fontFamily: profile?.font || "Manrope"
             }}
         >
+            <section className="user-hero">
             {profile?.backgroundType === "video" ? (
                 <video
                     className="user-background-video"
@@ -224,15 +225,21 @@ export default async function UserPage({ params }) {
                         </div>
                     )}
                     <ProfileViews initialViews={profile?.views ?? 0} />
+                    
                     </div>
+                    
                     </LiquidGlass>
+                    
                 </div>
-                            <Guestbook
-                                username={user.username}
-                                isOwner={isOwner}
-                            />
+            </div>    
+        </section>    
+        <section className="user-guestbook-section">
+            <Guestbook
+                username={user.username}
+                isOwner={isOwner}
+            />
+        </section>
 
-            </div>
         </main>
         </ProfileEntry>
     );

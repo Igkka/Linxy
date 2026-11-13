@@ -1,29 +1,31 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
 
-/* Основная страница */
 .user-page {
     position: relative;
-    isolation: isolate;
-    min-height: 100vh;
+    display: block;
     width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding:250px 16px;
-    overflow: hidden;
-    background: #050505;
+    min-height: 100vh;
+    padding: 0;
+    overflow: visible;
+    background: #000;
     color: #fff;
     font-family: inherit;
 }
 
-.user-page * {
-    box-sizing: border-box;
-    font-family: inherit;
+.user-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 650px;
+    padding: 250px 16px;
+    overflow: hidden;
+    background: #050505;
 }
 
-/* Фон */
 .user-background-video,
 .user-background-image {
     position: absolute;
@@ -34,7 +36,9 @@
 }
 
 .user-background-video {
+    display: block;
     object-fit: cover;
+    object-position: center;
 }
 
 .user-background-image {
@@ -43,7 +47,7 @@
     background-repeat: no-repeat;
 }
 
-.user-page::after {
+.user-hero::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -52,7 +56,6 @@
     pointer-events: none;
 }
 
-/* Контент располагается поверх фона */
 .user-content {
     position: relative;
     z-index: 1;
@@ -64,6 +67,19 @@
     gap: 14px;
 }
 
+.user-guestbook-section {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 300px;
+    padding: 1px 16px 80px;
+    background: #000;
+}
+
+.user-page .user-guestbook-section .guestbook {
+    margin: 40px auto 0;
+    background: transparent;
+}
 /* Карточка профиля */
 .user-profile {
     position: relative;

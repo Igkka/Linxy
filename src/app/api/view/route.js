@@ -25,12 +25,6 @@ const { username } = await request.json();
         }
     });
 
-    if (!user?.profile) {
-        return NextResponse.json(
-            { error: "Profile not found." },
-            { status: 404 }
-        );
-    }
 
     const profile = user.profile;
     const visitorId =

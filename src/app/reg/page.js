@@ -66,6 +66,7 @@ export default function RegisterPage() {
                         placeholder="yourname"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
+                        pattern="[a-zA-Z0-9_]+"
                         required
                     />
 
@@ -76,6 +77,7 @@ export default function RegisterPage() {
                         placeholder="you@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        pattern="[a-zA-Z0-9_]+"
                         required
                     />
 

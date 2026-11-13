@@ -17,12 +17,6 @@ export async function GET(request, { params }) {
       select: { id: true },
     });
 
-    if (!profile) {
-      return NextResponse.json(
-        { error: "Profile not found." },
-        { status: 404 }
-      );
-    }
 
     const messages = await prisma.guestbookMessage.findMany({
       where: {
@@ -85,12 +79,6 @@ export async function POST(request, { params }) {
       },
     });
 
-    if (!owner?.profile) {
-      return NextResponse.json(
-        { error: "Profile not found." },
-        { status: 404 }
-      );
-    }
 
     const currentUser = await getCurrentUser();
 
